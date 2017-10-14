@@ -1,7 +1,8 @@
 var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
 var Twitter = require('twitter');
-var Request = require('request');
+var request = require('request');
+var fs = require('fs');
 
 var spotify = new Spotify({
   id: '73c933ecf3aa4b08829e1a2fcde0e87e',
@@ -85,7 +86,40 @@ function tweets() {
   });
 }
 
+function movieThis(movie) {
+  var movieToSearch;
+  if(movie) movieToSearch = "t=" + movie;
+  else movieToSearch = "i=tt0485947"
+  request('http://www.omdbapi.com/?apikey=40e9cece&' + movieToSearch, function(error, response, body) {
+    if(error) {
+      console.log("error: " + error);
+    }
+    var result = JSON.parse(body);
+    console.log("Title: " + result.Title);
+    console.log("Released: " + result.Released);
+    for (each in result.Ratings) {
+      var string = result.Ratings[each].Source;
+      string += ": " + result.Ratings[each].Value;
+      console.log(string);
+    }
+    console.log("Country: " + result.Country);
+    console.log("Language: " + result.Language);
+    console.log("Plot: " + result.Plot);
+    console.log("Actors: " + result.Actors);
+  });
+}
 
+function doIt() {
+  fs.readFile('random.txt', 'utf8', function(error, data) {
+    if(error) {
+      return console.log("Error: " + error);
+    }
+    var dataArr = data.split(",");
+    command = dataArr[0];
+    input = dataArr[1];
+    spotSearch(input);
+  });
+}
 
 var command = process.argv[2];
 var input = process.argv.slice(3).join("+");
@@ -95,4 +129,19 @@ var input = process.argv.slice(3).join("+");
 //movie-this
 //do-what-it-says
 console.log ({command, input});
-tweets();
+switch(command) {
+  case "my-tweets":
+    tweets();
+    break;
+  case "spotify-this-song" :
+    spotSearch(input);
+    break;
+  case "movie-this" :
+    movieThis(input);
+    break;
+  case "do-what-it-says":
+    doIt();
+    break;
+  default:
+    console.log("Sorry, I don't recognize that command. Please run again with a valid command.");
+}
