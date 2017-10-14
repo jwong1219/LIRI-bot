@@ -1,6 +1,7 @@
 var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
 var Twitter = require('twitter');
+var Request = require('request');
 
 var spotify = new Spotify({
   id: '73c933ecf3aa4b08829e1a2fcde0e87e',
@@ -15,32 +16,59 @@ var client = new Twitter({
 });
 
 function spotSearch(song) { 
-  spotify.search({ type: 'track', query: song, limit: 1 }, function(err, data) {
-    if (err) {
-      return console.log('Error occurred: ' + err);
-    }
-    // console.log(data); 
-    var listTracks = data.tracks.items[0];
-    // console.log(listTracks);
-    var album = listTracks.album.name;
-    var artists = "";
-    for (each in listTracks.artists) { //this is an array, that can have multiple artists for that track
-      if(!artists) {
-        artists += listTracks.artists[each].name;
+  if(song) {
+    spotify.search({ type: 'track', query: song, limit: 1 }, function(err, data) {
+      if (err) {
+        return console.log('Error occurred: ' + err);
       }
-      else {
-        artists += "& ";
-        artists += listTracks.artists[each].name;
+      // console.log(data); 
+      var listTracks = data.tracks.items[0];
+      // console.log(listTracks);
+      var album = listTracks.album.name;
+      var artists = "";
+      for (each in listTracks.artists) { //this is an array that can have multiple artists for that track
+        if(!artists) {
+          artists += listTracks.artists[each].name;
+        }
+        else {
+          artists += "& ";
+          artists += listTracks.artists[each].name;
+        }
       }
-    }
-    var songName = listTracks.name;
-    var previewURL = listTracks.preview_url;
-    console.log("Artist(s): " + artists);
-    console.log("Song: " + songName);
-    console.log("Preview: " + previewURL);
-    console.log("Album: " + album);
-
-  });
+      var songName = listTracks.name;
+      var previewURL = listTracks.preview_url;
+      console.log("Artist(s): " + artists);
+      console.log("Song: " + songName);
+      console.log("Preview: " + previewURL);
+      console.log("Album: " + album);
+    });
+  }
+  else {
+    spotify.request('https://api.spotify.com/v1/tracks/0hrBpAOgrt8RXigk83LLNE')
+    .then(function(data) {
+      
+      var album = data.album.name;
+      var artists = "";
+      for (each in data.artists) { //this is an array that can have multiple artists for that track
+        if(!artists) {
+          artists += data.artists[each].name;
+        }
+        else {
+          artists += "& ";
+          artists += data.artists[each].name;
+        }
+      }
+      var songName = data.name;
+      var previewURL = data.preview_url;
+      console.log("Artist(s): " + artists);
+      console.log("Song: " + songName);
+      console.log("Preview: " + previewURL);
+      console.log("Album: " + album);
+    })
+    .catch(function(err) {
+      console.error('Error occurred: ' + err);
+    });
+  }
 }
 
 var command = process.argv[2];
