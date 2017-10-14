@@ -71,8 +71,28 @@ function spotSearch(song) {
   }
 }
 
+function tweets() {
+  client.get('statuses/user_timeline.json?screen_name=realdonaldtrump&count=20&include_rts=false', function(error, tweets, response) {
+    if(error) throw error;
+    console.log("Who let this guy in here....");
+    console.log("============");
+    // console.log(tweets);
+    for (each in tweets) {
+      console.log("When: " + tweets[each].created_at);
+      console.log("What: " + tweets[each].text);
+      console.log("============");
+    }
+  });
+}
+
+
+
 var command = process.argv[2];
 var input = process.argv.slice(3).join("+");
-
+//commands: 
+//my-tweets
+//spotify-this-song
+//movie-this
+//do-what-it-says
 console.log ({command, input});
-spotSearch(input);
+tweets();
