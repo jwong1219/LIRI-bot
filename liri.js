@@ -73,7 +73,13 @@ function spotSearch(song) {
 }
 
 function tweets() {
-  client.get('statuses/user_timeline.json?screen_name=realdonaldtrump&count=20&include_rts=false', function(error, tweets, response) {
+  var params = {
+    screen_name: "realdonaldtrump",
+    count: 20,
+    include_rts: "false"
+  }
+  // client.get('statuses/user_timeline.json?screen_name=realdonaldtrump&count=20&include_rts=false', function(error, tweets, response) {
+  client.get('statuses/user_timeline.json', params, function(error, tweets, response) {
     if(error) throw error;
     console.log("Who let this guy in here....");
     console.log("============");
@@ -117,31 +123,37 @@ function doIt() {
     var dataArr = data.split(",");
     command = dataArr[0];
     input = dataArr[1];
-    spotSearch(input);
+    // spotSearch(input);
+    console.log({command, input});
+    runLIRI();
   });
 }
 
 var command = process.argv[2];
 var input = process.argv.slice(3).join("+");
-//commands: 
-//my-tweets
-//spotify-this-song
-//movie-this
-//do-what-it-says
-console.log ({command, input});
-switch(command) {
-  case "my-tweets":
-    tweets();
-    break;
-  case "spotify-this-song" :
-    spotSearch(input);
-    break;
-  case "movie-this" :
-    movieThis(input);
-    break;
-  case "do-what-it-says":
-    doIt();
-    break;
-  default:
-    console.log("Sorry, I don't recognize that command. Please run again with a valid command.");
+console.log({command, input});
+fs.appendFile("log.txt", command + " " + input + "\n", function(err) {
+  if(err) throw err;
+  console.log("The data was not appended to file!");
+});
+runLIRI();
+
+function runLIRI() {
+  switch(command) {
+    case "my-tweets":
+      tweets();
+      break;
+    case "spotify-this-song" :
+      spotSearch(input);
+      break;
+    case "movie-this" :
+      movieThis(input);
+      break;
+    case "do-what-it-says":
+      console.log("doing it");
+      doIt();
+      break;
+    default:
+      console.log("Sorry, I don't recognize that command. Please run again with a valid command.");
+  }
 }
