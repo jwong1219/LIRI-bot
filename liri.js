@@ -16,7 +16,8 @@ var client = new Twitter({
   access_token_secret: keys.access_token_secret
 });
 
-function spotSearch(song) { 
+function spotSearch(song) {
+  writeCommand(); 
   if(song) {
     spotify.search({ type: 'track', query: song, limit: 1 }, function(err, data) {
       if (err) {
@@ -73,6 +74,7 @@ function spotSearch(song) {
 }
 
 function tweets() {
+  writeCommand();
   var params = {
     screen_name: "realdonaldtrump",
     count: 20,
@@ -93,6 +95,7 @@ function tweets() {
 }
 
 function movieThis(movie) {
+  writeCommand();
   var movieToSearch;
   if(movie) movieToSearch = "t=" + movie;
   else movieToSearch = "i=tt0485947"
@@ -116,6 +119,7 @@ function movieThis(movie) {
 }
 
 function doIt() {
+  writeCommand();
   fs.readFile('random.txt', 'utf8', function(error, data) {
     if(error) {
       return console.log("Error: " + error);
@@ -129,13 +133,19 @@ function doIt() {
   });
 }
 
+function writeCommand() {
+  fs.appendFile("log.txt", command + " " + input + "\n", function(err) {
+    if(err) {
+      throw err;
+      console.log("The data was not appended to file!");
+    }
+  });
+}
+
 var command = process.argv[2];
 var input = process.argv.slice(3).join("+");
 console.log({command, input});
-fs.appendFile("log.txt", command + " " + input + "\n", function(err) {
-  if(err) throw err;
-  console.log("The data was not appended to file!");
-});
+
 runLIRI();
 
 function runLIRI() {
