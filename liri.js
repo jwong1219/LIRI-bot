@@ -17,7 +17,8 @@ var client = new Twitter({
 });
 
 function spotSearch(song) {
-  writeCommand(); 
+  logCommand(); 
+  var output = "";
   if(song) {
     spotify.search({ type: 'track', query: song, limit: 1 }, function(err, data) {
       if (err) {
@@ -39,10 +40,12 @@ function spotSearch(song) {
       }
       var songName = listTracks.name;
       var previewURL = listTracks.preview_url;
-      console.log("Artist(s): " + artists);
-      console.log("Song: " + songName);
-      console.log("Preview: " + previewURL);
-      console.log("Album: " + album);
+      output += ("Artist(s): " + artists + "\n");
+      output += ("Song: " + songName + "\n");
+      output += ("Preview: " + previewURL + "\n");
+      output += ("Album: " + album + "\n");
+      console.log(output);
+      logOutput(output);
     });
   }
   else {
@@ -62,10 +65,12 @@ function spotSearch(song) {
       }
       var songName = data.name;
       var previewURL = data.preview_url;
-      console.log("Artist(s): " + artists);
-      console.log("Song: " + songName);
-      console.log("Preview: " + previewURL);
-      console.log("Album: " + album);
+      output += ("Artist(s): " + artists + "\n");
+      output += ("Song: " + songName + "\n");
+      output += ("Preview: " + previewURL + "\n");
+      output += ("Album: " + album + "\n");
+      console.log(output);
+      logOutput(output);
     })
     .catch(function(err) {
       console.error('Error occurred: ' + err);
@@ -74,7 +79,7 @@ function spotSearch(song) {
 }
 
 function tweets() {
-  writeCommand();
+  logCommand();
   var params = {
     screen_name: "realdonaldtrump",
     count: 20,
@@ -83,19 +88,22 @@ function tweets() {
   // client.get('statuses/user_timeline.json?screen_name=realdonaldtrump&count=20&include_rts=false', function(error, tweets, response) {
   client.get('statuses/user_timeline.json', params, function(error, tweets, response) {
     if(error) throw error;
-    console.log("Who let this guy in here....");
-    console.log("============");
+    var output = "";
+    output += ("Who let this guy in here....\n");
+    output += ("############\n");
     // console.log(tweets);
     for (each in tweets) {
-      console.log("When: " + tweets[each].created_at);
-      console.log("What: " + tweets[each].text);
-      console.log("============");
+      output += ("When: " + tweets[each].created_at + "\n");
+      output += ("What: " + tweets[each].text + "\n");
+      output += ("============\n");
     }
+    console.log(output);
+    logOutput(output);
   });
 }
 
 function movieThis(movie) {
-  writeCommand();
+  logCommand();
   var movieToSearch;
   if(movie) movieToSearch = "t=" + movie;
   else movieToSearch = "i=tt0485947"
@@ -103,23 +111,26 @@ function movieThis(movie) {
     if(error) {
       console.log("error: " + error);
     }
+    var output = "";
     var result = JSON.parse(body);
-    console.log("Title: " + result.Title);
-    console.log("Released: " + result.Released);
+    output += ("Title: " + result.Title + "\n");
+    output += ("Released: " + result.Released + "\n");
     for (each in result.Ratings) {
       var string = result.Ratings[each].Source;
       string += ": " + result.Ratings[each].Value;
-      console.log(string);
+      output += (string + "\n");
     }
-    console.log("Country: " + result.Country);
-    console.log("Language: " + result.Language);
-    console.log("Plot: " + result.Plot);
-    console.log("Actors: " + result.Actors);
+    output += ("Country: " + result.Country + "\n");
+    output += ("Language: " + result.Language + "\n");
+    output += ("Plot: " + result.Plot + "\n");
+    output += ("Actors: " + result.Actors + "\n");
+    console.log(output);
+    logOutput(output);
   });
 }
 
 function doIt() {
-  writeCommand();
+  logCommand();
   fs.readFile('random.txt', 'utf8', function(error, data) {
     if(error) {
       return console.log("Error: " + error);
@@ -133,8 +144,17 @@ function doIt() {
   });
 }
 
-function writeCommand() {
-  fs.appendFile("log.txt", command + " " + input + "\n", function(err) {
+function logCommand() {
+  fs.appendFile("log.txt", "========" + "\n" + command + " " + input + "\n" + "********" + "\n", function(err) {
+    if(err) {
+      throw err;
+      console.log("The data was not appended to file!");
+    }
+  });
+}
+
+function logOutput(string) {
+  fs.appendFile("log.txt", string + "========" + "\n", function(err) {
     if(err) {
       throw err;
       console.log("The data was not appended to file!");
@@ -144,7 +164,7 @@ function writeCommand() {
 
 var command = process.argv[2];
 var input = process.argv.slice(3).join("+");
-console.log({command, input});
+// console.log({command, input});
 
 runLIRI();
 
@@ -160,7 +180,6 @@ function runLIRI() {
       movieThis(input);
       break;
     case "do-what-it-says":
-      console.log("doing it");
       doIt();
       break;
     default:

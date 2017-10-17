@@ -1,10 +1,85 @@
+========
 my-tweets 
-movie-this star+wars
+********
+Who let this guy in here....
+============
+When: Mon Oct 16 23:32:05 +0000 2017
+What: Always great to see the wonderful people of South Carolina. Thank you for the beautiful welcome at Greenville-Spart… https://t.co/nRKBvOoskK
+============
+When: Mon Oct 16 13:12:43 +0000 2017
+What: I was recently asked if Crooked Hillary Clinton is going to run in 2020? My answer was, "I hope so!"
+============
+When: Mon Oct 16 12:57:50 +0000 2017
+What: The U.S. has gained more than 5.2 trillion dollars in Stock Market Value since Election Day! Also, record business enthusiasm.
+============
+When: Mon Oct 16 12:54:49 +0000 2017
+What: Since Election Day on November 8, the Stock Market is up more than 25%, unemployment is at a 17 year low &amp; companies are coming back to U.S.
+============
+When: Mon Oct 16 12:49:27 +0000 2017
+What: Dem Senator Schumer hated the Iran deal made by President Obama, but now that I am involved, he is OK with it. Tell that to Israel, Chuck!
+============
+When: Mon Oct 16 12:21:49 +0000 2017
+What: The Democrats only want to increase taxes and obstruct. That's all they are good at!
+============
+When: Mon Oct 16 12:17:10 +0000 2017
+What: Art Laffer just said that he doesn't know how a Democrat could vote against the big tax cut/reform bill and live with themselves!  @FoxNews
+============
+When: Sun Oct 15 13:46:27 +0000 2017
+What: ...approvals of The Keystone XL &amp; Dakota Access pipelines. Also, look at the recent EPA cancelations &amp; our great new Supreme Court Justice!
+============
+When: Sun Oct 15 13:25:05 +0000 2017
+What: The Failing @nytimes, in a story by Peter Baker, should have mentioned the rapid terminations by me of TPP &amp; The Paris Accord &amp; the fast....
+============
+When: Sat Oct 14 21:27:22 +0000 2017
+What: The Democrats in the Southwest part of Virginia have been abandoned by their Party. Republican Ed Gillespie will never let you down!
+============
+When: Sat Oct 14 11:27:00 +0000 2017
+What: Very proud of my Executive Order which will allow greatly expanded access and far lower costs for HealthCare. Millions of people benefit!
+============
+When: Sat Oct 14 11:18:49 +0000 2017
+What: Health Insurance stocks, which have gone through the roof during the ObamaCare years, plunged yesterday after I ended their Dems windfall!
+============
+========
+========
+movie-this the+nightmare+before+christmas
+********
+Title: The Nightmare Before Christmas
+Released: 29 Oct 1993
+Internet Movie Database: 8.0/10
+Rotten Tomatoes: 94%
+Country: USA
+Language: English
+Plot: Jack Skellington, king of Halloween Town, discovers Christmas Town, but his attempts to bring Christmas to his home cause confusion.
+Actors: Danny Elfman, Chris Sarandon, Catherine O'Hara, William Hickey
+========
+========
 do-what-it-says 
+********
+========
+movie-this  Star Wars
+********
+Title: The Star Wars Holiday Special
+Released: 17 Nov 1978
+Internet Movie Database: 2.3/10
+Rotten Tomatoes: 43%
+Country: USA
+Language: English
+Plot: Chewbacca and Han Solo try to get home to Chewie's family to celebrate Life Day, which includes various forms of entertainment.
+Actors: Mark Hamill, Harrison Ford, Carrie Fisher, Anthony Daniels
+========
+========
 do-what-it-says 
-do-what-it-says 
-do-what-it-says 
-do-what-it-says 
-do-what-it-says 
-spotify-this-song in+the+end
-my-tweets 
+********
+========
+movie-this Star Wars
+********
+Title: Star Wars: Episode IV - A New Hope
+Released: 25 May 1977
+Internet Movie Database: 8.7/10
+Rotten Tomatoes: 93%
+Metacritic: 92/100
+Country: USA
+Language: English
+Plot: Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee, and two droids to save the galaxy from the Empire's world-destroying battle-station, while also attempting to rescue Princess Leia from the evil Darth Vader.
+Actors: Mark Hamill, Harrison Ford, Carrie Fisher, Peter Cushing
+========
